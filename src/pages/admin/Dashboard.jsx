@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Users, Car, Calendar, DollarSign, TrendingUp, BarChart3, PieChart, Activity } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import api from '../../api/client';
-import logo from '../../assets/images/logo.png'; // Corrected path
+
 
 const AdminDashboard = () => {
     const [stats, setStats] = useState({

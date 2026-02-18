@@ -45,7 +45,7 @@ const AdminLogin = () => {
         <div className="min-h-screen bg-black flex items-center justify-center p-4">
             <div className="bg-dark-900 border border-white/10 rounded-3xl p-8 w-full max-w-md shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gold-500 to-yellow-600"></div>
-                
+
                 <div className="text-center mb-8">
                     <h1 className="text-3xl font-bold text-white mb-2">Admin Portal</h1>
                     <p className="text-gray-400">Secure access for RentOn administrators</p>
@@ -61,10 +61,10 @@ const AdminLogin = () => {
                         name="email"
                         rules={[{ required: true, message: 'Please input your Email!' }, { type: 'email', message: 'Invalid email!' }]}
                     >
-                        <Input 
-                            prefix={<Mail className="text-gray-500" size={18} />} 
-                            placeholder="Admin Email" 
-                            className="!bg-gray-900 !border-white/10 !text-white rounded-xl h-12 hover:!border-gold-500 focus:!border-gold-500 placeholder:text-gray-500"
+                        <Input
+                            prefix={<Mail className="text-gray-500" size={18} />}
+                            placeholder="Admin Email"
+                            className="!bg-dark-800 !border-white/10 !text-white h-12 rounded-xl focus:!border-gold-500 hover:!border-gold-500 placeholder:!text-white/70"
                         />
                     </Form.Item>
 
@@ -72,17 +72,17 @@ const AdminLogin = () => {
                         name="password"
                         rules={[{ required: true, message: 'Please input your Password!' }]}
                     >
-                        <Input.Password 
-                            prefix={<Lock className="text-gray-500" size={18} />} 
-                            placeholder="Password" 
-                            className="!bg-gray-900 !border-white/10 !text-white rounded-xl h-12 hover:!border-gold-500 focus:!border-gold-500 placeholder:text-gray-500"
+                        <Input.Password
+                            prefix={<Lock className="text-gray-500" size={18} />}
+                            placeholder="Password"
+                            className="!bg-dark-800 !border-white/10 !text-white h-12 rounded-xl focus:!border-gold-500 hover:!border-gold-500 placeholder:!text-white/70"
                         />
                     </Form.Item>
 
                     <Form.Item>
-                        <Button 
-                            type="primary" 
-                            htmlType="submit" 
+                        <Button
+                            type="primary"
+                            htmlType="submit"
                             loading={loading}
                             className="w-full bg-gold-500 text-black font-bold h-12 rounded-xl border-none hover:!bg-white hover:!text-black transition-colors text-lg"
                         >
@@ -90,7 +90,7 @@ const AdminLogin = () => {
                         </Button>
                     </Form.Item>
                 </Form>
-                
+
                 <div className="text-center mt-6 text-xs text-gray-600">
                     <p>Unauthorized access is prohibited.</p>
                     <p>IP Address Logged.</p>

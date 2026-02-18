@@ -30,14 +30,14 @@ const ResetPassword = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden">
-             {/* Background Effects */}
-             <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-                 <div className="absolute top-[-10%] left-[-10%] w-[800px] h-[800px] bg-gold-500/10 rounded-full blur-[120px]"></div>
-                 <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-brand-orange/10 rounded-full blur-[100px]"></div>
-                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+            {/* Background Effects */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+                <div className="absolute top-[-10%] left-[-10%] w-[800px] h-[800px] bg-gold-500/10 rounded-full blur-[120px]"></div>
+                <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-brand-orange/10 rounded-full blur-[100px]"></div>
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
             </div>
 
-            <motion.div 
+            <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
@@ -46,7 +46,7 @@ const ResetPassword = () => {
                 {!success ? (
                     <>
                         <Link to="/login" className="inline-flex items-center text-gray-400 hover:text-white mb-8 transition-colors">
-                            <ArrowLeft size={16} className="mr-2"/> Back to Login
+                            <ArrowLeft size={16} className="mr-2" /> Back to Login
                         </Link>
 
                         <div className="mb-8 text-center">
@@ -65,10 +65,10 @@ const ResetPassword = () => {
                                 rules={[{ required: true, message: 'Please input your password!' }, { min: 6, message: 'Password must be at least 6 characters' }]}
                                 className="mb-4"
                             >
-                                <Input.Password 
-                                    prefix={<Lock className="text-gold-500 mr-2" size={18}/>} 
-                                    placeholder="New Password" 
-                                    className="!bg-white/5 !border-white/10 !text-white h-12 rounded-xl focus:!border-gold-500 hover:!border-white/20 placeholder:!text-white/70" 
+                                <Input.Password
+                                    prefix={<Lock className="text-gold-500 mr-2" size={18} />}
+                                    placeholder="New Password"
+                                    className="!bg-dark-800 !border-white/10 !text-white h-12 rounded-xl focus:!border-gold-500 hover:!border-gold-500 placeholder:!text-white/70"
                                 />
                             </Form.Item>
 
@@ -89,15 +89,15 @@ const ResetPassword = () => {
                                 ]}
                                 className="mb-8"
                             >
-                                <Input.Password 
-                                    prefix={<Lock className="text-gold-500 mr-2" size={18}/>} 
-                                    placeholder="Confirm Password" 
-                                    className="!bg-white/5 !border-white/10 !text-white h-12 rounded-xl focus:!border-gold-500 hover:!border-white/20 placeholder:!text-white/70" 
+                                <Input.Password
+                                    prefix={<Lock className="text-gold-500 mr-2" size={18} />}
+                                    placeholder="Confirm Password"
+                                    className="!bg-dark-800 !border-white/10 !text-white h-12 rounded-xl focus:!border-gold-500 hover:!border-gold-500 placeholder:!text-white/70"
                                 />
                             </Form.Item>
 
                             <Form.Item>
-                                <button 
+                                <button
                                     disabled={isLoading}
                                     className="w-full h-14 bg-gradient-to-r from-gold-500 to-amber-500 text-black font-bold rounded-xl hover:from-white hover:to-white transition-all shadow-[0_4px_20px_rgba(212,175,55,0.3)] flex items-center justify-center gap-2 text-lg"
                                 >
@@ -113,7 +113,7 @@ const ResetPassword = () => {
                         </div>
                         <h3 className="text-xl font-bold text-white mb-2">Password Reset Successful</h3>
                         <p className="text-gray-400 mb-8">You can now login with your new password. Redirecting...</p>
-                        <Link 
+                        <Link
                             to="/login"
                             className="text-gold-500 font-bold hover:text-white transition-colors"
                         >

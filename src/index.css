@@ -201,30 +201,86 @@ input::placeholder, textarea::placeholder {
 }
 
 /* Dark Input Overrides */
-.dark-input, .ant-input-number-input {
-    background-color: #1a1a1a !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    color: white !important;
-}
-
+/* Standalone Input */
 .ant-input {
     background-color: #1a1a1a !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
     color: white !important;
-    border-radius: 0.5rem;
+    border-radius: 0.75rem !important;
 }
 
+/* Input inside wrapper (Prefix, Suffix, Password) */
+.ant-input-affix-wrapper .ant-input {
+    border: none !important;
+    background-color: transparent !important;
+    margin: 0 !important;
+}
+
+/* The Wrapper itself */
+.ant-input-affix-wrapper {
+    background-color: #1a1a1a !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 0.75rem !important;
+    color: white !important;
+}
+
+/* Input Number Wrapper */
 .ant-input-number {
     background-color: #1a1a1a !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 0.75rem !important;
     color: white !important;
     width: 100%;
-    border-radius: 0.5rem;
 }
 
-.ant-input:focus, .ant-input-focused, .ant-input-number-focused {
+/* Input Number Inner */
+.ant-input-number-input {
+    background-color: transparent !important;
+    border: none !important;
+    color: white !important;
+}
+
+.ant-input-number-handler-wrap {
+    border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: #1a1a1a !important;
+}
+
+.ant-input-number-handler {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.ant-input-number-handler:active {
+    background: #2a2a2a !important;
+}
+
+.ant-input-number-handler-up-inner, .ant-input-number-handler-down-inner {
+    color: white !important;
+}
+
+/* Focus States - Remove double glow/shadow */
+.ant-input:focus, .ant-input-focused, 
+.ant-input-affix-wrapper:focus, .ant-input-affix-wrapper-focused,
+.ant-input-number:focus, .ant-input-number-focused {
     border-color: #D4AF37 !important;
-    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2) !important;
+    box-shadow: none !important;
+}
+
+/* Input Icons (Prefix/Suffix) */
+.ant-input-prefix, .ant-input-suffix {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.ant-input-password-icon {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.ant-input-password-icon:hover {
+    color: white !important;
+}
+
+/* TextArea specific */
+textarea.ant-input {
+    min-height: 100px;
 }
 
 .no-border-select .ant-select-selector {

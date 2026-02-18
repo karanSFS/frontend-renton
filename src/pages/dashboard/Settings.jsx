@@ -24,7 +24,7 @@ const Settings = () => {
             profileForm.setFieldsValue({
                 name: user.name,
                 email: user.email,
-                bio: user.bio || "Automotive enthusiast. Premium member since 2026.",
+                bio: user.bio || "",
                 phone: user.phone || "",
                 licenseNumber: user.licenseNumber || ""
             });
@@ -39,13 +39,13 @@ const Settings = () => {
 
     const onFinishProfile = (values) => {
         const formData = new FormData();
-        
+
         if (values.name) formData.append('name', values.name);
         if (values.email) formData.append('email', values.email);
         if (values.bio) formData.append('bio', values.bio);
         if (values.phone) formData.append('phone', values.phone);
         if (values.licenseNumber) formData.append('licenseNumber', values.licenseNumber);
-        
+
         if (fileList.length > 0 && fileList[0].originFileObj) {
             formData.append('profileImage', fileList[0].originFileObj);
         }
@@ -68,7 +68,7 @@ const Settings = () => {
         formData.append('password', values.password);
 
         dispatch(updateProfile(formData)).then((res) => {
-             if (!res.error) {
+            if (!res.error) {
                 message.success('Password updated successfully');
                 passwordForm.resetFields(['password', 'confirmPassword']); // Clear password fields
             } else {
@@ -115,7 +115,7 @@ const Settings = () => {
 
     return (
         <div className="max-w-4xl mx-auto space-y-8 pb-12">
-            
+
             {/* Profile Section */}
             <div className="bg-dark-900 border border-white/5 rounded-3xl p-8">
                 {/* ... existing header code ... */}
@@ -124,29 +124,29 @@ const Settings = () => {
                         <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-dark-800 mb-4 mx-auto relative group">
                             <img src={profilePreview} alt="Profile" className="w-full h-full object-cover" />
                             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                                <Upload 
-                                    showUploadList={false} 
-                                    beforeUpload={() => false} 
+                                <Upload
+                                    showUploadList={false}
+                                    beforeUpload={() => false}
                                     onChange={handleUploadChange}
                                 >
-                                    <UploadIcon className="text-white cursor-pointer"/>
+                                    <UploadIcon className="text-white cursor-pointer" />
                                 </Upload>
                             </div>
                         </div>
-                        <Upload 
-                            showUploadList={false} 
-                            beforeUpload={() => false} 
+                        <Upload
+                            showUploadList={false}
+                            beforeUpload={() => false}
                             onChange={handleUploadChange}
                         >
                             <p className="text-gold-500 font-bold text-sm cursor-pointer hover:underline">Change Photo</p>
                         </Upload>
                     </div>
 
-                    <Form 
+                    <Form
                         form={profileForm}
-                        layout="vertical" 
-                        initialValues={{ name: user?.name, email: user?.email, bio: user?.bio || "Automotive enthusiast. Premium member since 2026." }} 
-                        onFinish={onFinishProfile} 
+                        layout="vertical"
+                        initialValues={{ name: user?.name, email: user?.email, bio: user?.bio || "" }}
+                        onFinish={onFinishProfile}
                         className="flex-grow w-full"
                     >
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -154,7 +154,7 @@ const Settings = () => {
                                 <Input className="!bg-dark-800 !border-white/10 !text-white h-12 rounded-xl" />
                             </Form.Item>
                             <Form.Item label={<span className="text-white">Email</span>} name="email">
-                                <Input disabled className="!bg-dark-800/50 !border-white/5 !text-gray-400 h-12 rounded-xl" suffix={<Lock size={14} className="text-gray-500"/>} />
+                                <Input className="!bg-dark-800 !border-white/10 !text-white h-12 rounded-xl" />
                             </Form.Item>
                         </div>
 
@@ -167,25 +167,25 @@ const Settings = () => {
                             </Form.Item>
                         </div>
 
-                         <div className="flex flex-col gap-3 mb-6">
-                             <span className="text-white font-medium">Driving License Copy</span>
-                             <div className="flex flex-col sm:flex-row items-center gap-6">
+                        <div className="flex flex-col gap-3 mb-6">
+                            <span className="text-white font-medium">Driving License Copy</span>
+                            <div className="flex flex-col sm:flex-row items-center gap-6">
                                 <div className="relative group w-full sm:w-64 h-40 rounded-xl overflow-hidden border-2 border-dashed border-white/20 bg-dark-800 flex items-center justify-center transition-all hover:border-gold-500/50">
                                     {licensePreview ? (
                                         <>
-                                            <img 
-                                                src={licensePreview} 
-                                                alt="License" 
-                                                className="w-full h-full object-cover" 
+                                            <img
+                                                src={licensePreview}
+                                                alt="License"
+                                                className="w-full h-full object-cover"
                                             />
                                             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                                                <Upload 
-                                                    showUploadList={false} 
+                                                <Upload
+                                                    showUploadList={false}
                                                     fileList={licenseFileList}
-                                                    beforeUpload={() => false} 
+                                                    beforeUpload={() => false}
                                                     onChange={handleLicenseUploadChange}
                                                 >
-                                                    <Button className="bg-transparent border-white text-white hover:bg-white hover:text-black font-medium" icon={<UploadIcon size={16}/>}>
+                                                    <Button className="bg-transparent border-white text-white hover:bg-white hover:text-black font-medium" icon={<UploadIcon size={16} />}>
                                                         Change Image
                                                     </Button>
                                                 </Upload>
@@ -193,10 +193,10 @@ const Settings = () => {
                                         </>
                                     ) : (
                                         <div className="text-center p-6">
-                                             <Upload 
-                                                showUploadList={false} 
+                                            <Upload
+                                                showUploadList={false}
                                                 fileList={licenseFileList}
-                                                beforeUpload={() => false} 
+                                                beforeUpload={() => false}
                                                 onChange={handleLicenseUploadChange}
                                             >
                                                 <div className="cursor-pointer flex flex-col items-center gap-2 text-gray-400 group-hover:text-gold-500 transition-colors">
@@ -210,9 +210,9 @@ const Settings = () => {
                                 <div className="text-sm text-gray-500 max-w-xs">
                                     <p>Upload a clear image of your driving license for verification. Accepted formats: JPG, PNG.</p>
                                 </div>
-                             </div>
-                         </div>
-                        
+                            </div>
+                        </div>
+
                         <Form.Item label={<span className="text-white">Bio</span>} name="bio">
                             <Input.TextArea rows={4} className="!bg-dark-800 !border-white/10 !text-white rounded-xl" />
                         </Form.Item>
@@ -266,12 +266,12 @@ const Settings = () => {
                 </div>
 
                 <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
-                     <Form layout="vertical" onFinish={onFinishPassword} form={passwordForm}>
+                    <Form layout="vertical" onFinish={onFinishPassword} form={passwordForm}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Form.Item label={<span className="text-white">New Password</span>} name="password" rules={[{ min: 6, message: 'Password must be at least 6 characters' }]}>
                                 <Input.Password className="!bg-dark-800 !border-white/10 !text-white h-12 rounded-xl" />
                             </Form.Item>
-                             <Form.Item label={<span className="text-white">Confirm Password</span>} name="confirmPassword" 
+                            <Form.Item label={<span className="text-white">Confirm Password</span>} name="confirmPassword"
                                 dependencies={['password']}
                                 rules={[
                                     ({ getFieldValue }) => ({
@@ -283,14 +283,14 @@ const Settings = () => {
                                         },
                                     }),
                                 ]}
-                             >
+                            >
                                 <Input.Password className="!bg-dark-800 !border-white/10 !text-white h-12 rounded-xl" />
                             </Form.Item>
                         </div>
                         <Button htmlType="submit" loading={isLoading} className="bg-white text-black border-none font-bold h-12 px-8 rounded-xl hover:!bg-gold-500 transition-colors">
                             Update Password
                         </Button>
-                     </Form>
+                    </Form>
                 </div>
             </div>
 
@@ -305,7 +305,7 @@ const Settings = () => {
                         <p className="text-gray-400 text-sm">Irreversible actions for your account.</p>
                     </div>
                 </div>
-                
+
                 <div className="bg-red-500/10 border border-red-500/10 p-6 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4">
                     <div>
                         <h3 className="text-white font-bold mb-1">Delete Account</h3>

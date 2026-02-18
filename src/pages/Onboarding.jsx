@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, DatePicker, Select, Upload, Steps, message } from 'antd';
@@ -18,8 +18,13 @@ const Onboarding = () => {
     const { user } = useSelector((state) => state.auth);
     const [formData, setFormData] = useState({});
 
+    // Restore form values when navigating between steps
+    useEffect(() => {
+        form.setFieldsValue(formData);
+    }, [current, formData, form]);
+
     if (user?.onboardingCompleted) {
-         navigate('/dashboard');
+        navigate('/dashboard');
     }
 
     const normFile = (e) => {
@@ -35,14 +40,14 @@ const Onboarding = () => {
         console.log("Final Onboarding Data:", finalData);
 
         const submitData = new FormData();
-        
+
         // Append simple fields
         submitData.append('dob', finalData.dob ? finalData.dob.toISOString() : '');
         submitData.append('address', finalData.address || '');
         submitData.append('licenseNumber', finalData.licenseNumber || '');
         submitData.append('emergencyContact', finalData.emergencyContact || '');
         submitData.append('preferredVehicleType', finalData.preferredVehicleType || '');
-        
+
         // Append files
         if (finalData.profileImage && finalData.profileImage.length > 0) {
             submitData.append('profileImage', finalData.profileImage[0].originFileObj);
@@ -56,7 +61,7 @@ const Onboarding = () => {
                 message.success('Onboarding Completed!');
                 navigate('/dashboard');
             } else {
-                 message.error(res.payload || 'Onboarding failed');
+                message.error(res.payload || 'Onboarding failed');
             }
         });
     };
@@ -74,35 +79,35 @@ const Onboarding = () => {
     };
 
     const renderStepContent = () => {
-        switch(current) {
+        switch (current) {
             case 0:
                 return (
                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
                         <Form.Item name="profileImage" label={<span className="text-white">Profile Image</span>} valuePropName="fileList" getValueFromEvent={normFile}>
                             <Upload name="logo" listType="picture" className="dark-upload" beforeUpload={() => false} maxCount={1}>
-                                <Button className="bg-dark-800 border-white/20 text-white hover:border-gold-500 hover:text-gold-500" icon={<UploadIcon size={16}/>}>Click to upload</Button>
+                                <Button className="bg-dark-800 border-white/20 text-white hover:border-gold-500 hover:text-gold-500" icon={<UploadIcon size={16} />}>Click to upload</Button>
                             </Upload>
                         </Form.Item>
                         <Form.Item name="dob" label={<span className="text-white">Date of Birth</span>} rules={[{ required: true }]}>
                             <DatePicker className="w-full h-12 bg-dark-800 border-white/20 text-white rounded-xl placeholder:text-white/70" />
                         </Form.Item>
                         <Form.Item name="address" label={<span className="text-white">Address</span>} rules={[{ required: true }]}>
-                             <Input.TextArea rows={3} className="!bg-dark-800 !border-white/20 !text-white rounded-xl placeholder:!text-white/70" placeholder="123 Main St..." />
+                            <Input.TextArea rows={3} className="!bg-dark-800 !border-white/20 !text-white rounded-xl placeholder:!text-white/70" placeholder="123 Main St..." />
                         </Form.Item>
                     </motion.div>
                 );
             case 1:
                 return (
-                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
+                    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
                         <Form.Item name="licenseNumber" label={<span className="text-white">Driving License Number</span>} rules={[{ required: true }]}>
                             <div className="relative">
                                 <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 z-10" size={18} />
-                                <Input className="!bg-dark-800 !border-white/20 !text-white !pl-12 h-12 rounded-xl placeholder:!text-white/70" placeholder="DL-123456789" />
+                                <Input className="!bg-dark-800 !border-white/10 !text-white !pl-12 h-12 rounded-xl placeholder:!text-white/70" placeholder="DL-123456789" />
                             </div>
                         </Form.Item>
                         <Form.Item name="licenseImage" label={<span className="text-white">License Image</span>} valuePropName="fileList" getValueFromEvent={normFile}>
                             <Upload name="logo" listType="picture" beforeUpload={() => false} maxCount={1}>
-                                <Button className="bg-dark-800 border-white/20 text-white hover:border-gold-500 hover:text-gold-500" icon={<UploadIcon size={16}/>}>Upload License Copy</Button>
+                                <Button className="bg-dark-800 border-white/10 text-white hover:border-gold-500 hover:text-gold-500" icon={<UploadIcon size={16} />}>Upload License Copy</Button>
                             </Upload>
                         </Form.Item>
                     </motion.div>
@@ -111,14 +116,14 @@ const Onboarding = () => {
                 return (
                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
                         <Form.Item name="emergencyContact" label={<span className="text-white">Emergency Contact</span>} rules={[{ required: true }]}>
-                             <div className="relative">
+                            <div className="relative">
                                 <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 z-10" size={18} />
-                                <Input className="!bg-dark-800 !border-white/20 !text-white !pl-12 h-12 rounded-xl placeholder:!text-white/70" placeholder="+1 (555) 000-0000" />
+                                <Input className="!bg-dark-800 !border-white/10 !text-white !pl-12 h-12 rounded-xl placeholder:!text-white/70" placeholder="+1 (555) 000-0000" />
                             </div>
                         </Form.Item>
                         <Form.Item name="preferredVehicleType" label={<span className="text-white">Preferred Vehicle Type</span>} rules={[{ required: true }]}>
-                             <Select 
-                                className="h-12 !bg-dark-800 !border-white/20 text-white rounded-xl custom-select" 
+                            <Select
+                                className="h-12 !bg-dark-800 !border-white/10 text-white rounded-xl custom-select"
                                 popupClassName="bg-dark-900 border border-white/10 text-white"
                                 placeholder="Select vehicle type"
                                 style={{ color: 'white' }}
@@ -137,7 +142,7 @@ const Onboarding = () => {
         <div className="min-h-screen bg-dark-950 py-12 px-4 sm:px-6 lg:px-8 flex justify-center items-center">
             <div className="max-w-xl w-full bg-dark-900 border border-white/10 p-10 rounded-3xl shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gold-500/10 blur-[60px] rounded-full"></div>
-                
+
                 <div className="mb-8 text-center relative z-10">
                     <h2 className="text-3xl font-display font-bold text-white">Complete Profile</h2>
                     <p className="text-gray-500 mt-2">Step {current + 1} of 3</p>
@@ -160,10 +165,10 @@ const Onboarding = () => {
                                 Back
                             </Button>
                         ) : <div></div>}
-                        
+
                         {current < 2 ? (
                             <Button onClick={() => next()} className="h-12 px-8 bg-white text-dark-950 font-bold rounded-xl hover:bg-gold-500 hover:text-dark-950 transition-colors border-none flex items-center gap-2">
-                                Next <ArrowRight size={16}/>
+                                Next <ArrowRight size={16} />
                             </Button>
                         ) : (
                             <Button htmlType="submit" className="h-12 px-8 bg-gold-500 text-dark-950 font-bold rounded-xl hover:bg-white transition-colors border-none shadow-[0_0_20px_rgba(212,175,55,0.4)]">
